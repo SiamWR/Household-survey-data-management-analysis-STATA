@@ -1,0 +1,683 @@
+------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  D:\Stata Projects\Project 2\stata-fies-simple-portfolio/logs/03_validate_data.log
+  log type:  text
+ opened on:  18 Aug 2026, 14:49:06
+
+. 
+. use "$ROOT/data/clean/02_cleaned.dta", clear
+
+. 
+. * ---------------------------------------------------- *
+. * Basic checks
+. * ---------------------------------------------------- *
+. isid hh_id
+
+. 
+. assert hh_income > 0
+
+. assert hh_size >= 1
+
+. assert inlist(electricity, 0, 1)
+
+. 
+. * Missing values
+. misstable summarize
+(variables nonmissing or string)
+
+. 
+. tabulate head_job, missing
+
+   Household head |
+     job/business |
+           status |      Freq.     Percent        Cum.
+------------------+-----------------------------------
+  No Job/Business |      7,536       18.14       18.14
+With Job/Business |     34,008       81.86      100.00
+------------------+-----------------------------------
+            Total |     41,544      100.00
+
+. tabulate head_occupation, missing
+
+              Household Head Occupation |      Freq.     Percent        Cum.
+----------------------------------------+-----------------------------------
+               Accountants and auditors |         38        0.09        0.09
+      Accounting and bookkeeping clerks |         65        0.16        0.25
+Administrative secretaries and relate.. |         26        0.06        0.31
+Advertising and public relations mana.. |          1        0.00        0.31
+Agricultural or industrial machinery .. |          9        0.02        0.33
+     Agronomists and related scientists |         18        0.04        0.38
+         Air traffic safety technicians |          4        0.01        0.39
+      Air transport service supervisors |          2        0.00        0.39
+  Aircraft engine mechanics and fitters |          2        0.00        0.40
+Aircraft pilots, navigators and fligh.. |          1        0.00        0.40
+                 Appraisers and valuers |          4        0.01        0.41
+                             Architects |          8        0.02        0.43
+                    Assembling laborers |         30        0.07        0.50
+           Athletes and related workers |         13        0.03        0.53
+ Authors, journalists and other writers |          2        0.00        0.54
+      Automated assembly-line operators |          3        0.01        0.54
+Baked goods and cereal and chocolate .. |          8        0.02        0.56
+Bakers, pastry cooks and confectioner.. |         71        0.17        0.73
+Basketry weavers, brush makers and re.. |         17        0.04        0.78
+           Bet bookmakers and croupiers |        143        0.34        1.12
+Blacksmiths, hammersmiths, and forgin.. |          3        0.01        1.13
+Bleaching, dyeing and cleaning machin.. |          3        0.01        1.13
+        Bookbinders and related workers |          2        0.00        1.14
+                            Bookkeepers |         19        0.05        1.18
+Brewers and wine and other beverage m.. |          5        0.01        1.20
+Broadcasting and telecommunications e.. |          6        0.01        1.21
+       Builders (traditional materials) |          1        0.00        1.21
+           Building and fire inspectors |          5        0.01        1.23
+      Building and related electricians |        190        0.46        1.68
+                    Building caretakers |        168        0.40        2.09
+         Building construction laborers |      1,014        2.44        4.53
+Building frame and related trades wor.. |          5        0.01        4.54
+                            Bus drivers |         55        0.13        4.67
+Business machines mechanics and repai.. |          1        0.00        4.67
+Butchers, fishmongers and related foo.. |         52        0.13        4.80
+                                 Buyers |         12        0.03        4.83
+Cabinet/furniture makers and related .. |         27        0.06        4.89
+              Car, taxi and van drivers |        824        1.98        6.88
+                 Carpenters and joiners |      1,000        2.41        9.28
+             Cashiers and ticket clerks |         67        0.16        9.45
+               Cattle and dairy farmers |         73        0.18        9.62
+Cement and other mineral products mac.. |          2        0.00        9.63
+    Charcoal makers and related workers |         92        0.22        9.85
+                     Chemical engineers |          3        0.01        9.85
+Chemical processing plant operators n.. |          1        0.00        9.86
+Chemical products machine operators n.. |          3        0.01        9.86
+                               Chemists |          2        0.00        9.87
+                        Chicken farmers |         44        0.11        9.97
+                     Child care workers |         63        0.15       10.13
+             Choreographers and dancers |          3        0.01       10.13
+          Civil engineering technicians |          4        0.01       10.14
+                        Civil engineers |         50        0.12       10.26
+                        Coconut farmers |      1,036        2.49       12.76
+Coding, proof-reading and related cle.. |          1        0.00       12.76
+               Coffee and cacao farmers |         67        0.16       12.92
+College, university and higher educat.. |         56        0.13       13.06
+                        Combat soldiers |         56        0.13       13.19
+                    Commanding officers |          2        0.00       13.20
+                  Companions and valets |          1        0.00       13.20
+       Composers, musicians and singers |         12        0.03       13.23
+Compositors, typesetters and related .. |          6        0.01       13.24
+                    Computer assistants |          5        0.01       13.25
+Computer engineers and related profes.. |          8        0.02       13.27
+           Computer equipment operators |         21        0.05       13.32
+                   Computer programmers |          7        0.02       13.34
+            Concessionaires and loggers |          9        0.02       13.36
+Construction and maintenance laborers.. |        155        0.37       13.73
+                                  Cooks |        120        0.29       14.02
+                           Corn farmers |      1,724        4.15       18.17
+         Cotton and fiber crops farmers |         34        0.08       18.26
+Crane, hoist and related plant operat.. |          9        0.02       18.28
+     Customs and immigration inspectors |          1        0.00       18.28
+       Dairy products machine operators |          1        0.00       18.28
+                  Dairy products makers |          2        0.00       18.29
+                   Data entry operators |         21        0.05       18.34
+    Debt collectors and related workers |         80        0.19       18.53
+    Decorators and commercial designers |         11        0.03       18.56
+                     Deep-sea fishermen |        252        0.61       19.16
+                      Dental assistants |          2        0.00       19.17
+                               Dentists |          8        0.02       19.19
+Directors and chief executives of cor.. |         27        0.06       19.25
+          Domestic helpers and cleaners |        229        0.55       19.80
+Door-to-door and telephone salespersons |         66        0.16       19.96
+Doorkeepers, watchpersons and related.. |         58        0.14       20.10
+                              Draftsmen |         12        0.03       20.13
+Drivers of animal-drawn vehicles and .. |          2        0.00       20.14
+                           Duck raisers |         11        0.03       20.16
+Earth-moving and related plant operat.. |         31        0.07       20.24
+                             Economists |          1        0.00       20.24
+          Education methods specialists |          5        0.01       20.25
+                   Electrical Engineers |         13        0.03       20.28
+     Electrical engineering technicians |          4        0.01       20.29
+        Electrical equipment assemblers |          9        0.02       20.31
+       Electrical mechanics and fitters |         18        0.04       20.36
+        Electronic equipment assemblers |         27        0.06       20.42
+Electronics and communications engine.. |         10        0.02       20.45
+Electronics and communications engine.. |          6        0.01       20.46
+                    Electronics fitters |          3        0.01       20.47
+    Electronics mechanics and servicers |         18        0.04       20.51
+            Enlisted personnel n. e. c. |         32        0.08       20.59
+                          Estate agents |         35        0.08       20.67
+                          Faith healers |         11        0.03       20.70
+                       Farm technicians |          1        0.00       20.70
+                 Farmhands and laborers |      3,478        8.37       29.07
+               Fashion and other models |          2        0.00       29.08
+                        Fiber preparers |          1        0.00       29.08
+Fiber preparing, spinning and winding.. |          3        0.01       29.09
+                  Field legumes farmers |         61        0.15       29.23
+    Finance and administration managers |         44        0.11       29.34
+                           Firefighters |         14        0.03       29.37
+Fish-farm cultivators (excluding praw.. |          8        0.02       29.39
+                     Fishermen n. e. c. |          4        0.01       29.40
+           Fishery laborers and helpers |        353        0.85       30.25
+          Floor layers and tile setters |          4        0.01       30.26
+  Food and beverage tasters and graders |          3        0.01       30.27
+                        Food preservers |          5        0.01       30.28
+                   Forest tree planters |          8        0.02       30.30
+       Foresters and related scientists |          9        0.02       30.32
+                      Forestry laborers |         69        0.17       30.49
+                       Freight handlers |        217        0.52       31.01
+                     Fruit tree farmers |        330        0.79       31.80
+Fruit, vegetable and nut processing m.. |          5        0.01       31.82
+                     Garbage collectors |         26        0.06       31.88
+General elementary education teaching.. |        220        0.53       32.41
+General managers/managing proprietors.. |        554        1.33       33.74
+General managers/managing proprietors.. |         63        0.15       33.89
+General managers/managing proprietors.. |        539        1.30       35.19
+General managers/managing proprietors.. |         54        0.13       35.32
+General managers/managing proprietors.. |      1,932        4.65       39.97
+General managers/managing proprietors.. |      2,028        4.88       44.85
+General managers/managing proprietors.. |         91        0.22       45.07
+General managers/managing proprietors.. |        482        1.16       46.23
+General managers/managing proprietors.. |        254        0.61       46.84
+General secondary education teaching .. |        111        0.27       47.11
+Geodetic engineers and related profes.. |          2        0.00       47.12
+Glass and ceramics kiln and related m.. |          1        0.00       47.12
+Glass makers, cutters, grinders and f.. |          9        0.02       47.14
+Glass, ceramics and related plant ope.. |          1        0.00       47.14
+Government administrators (including .. |         30        0.07       47.22
+         Government licensing officials |          3        0.01       47.22
+   Government social benefits officials |          2        0.00       47.23
+    Government tax and excise officials |          3        0.01       47.23
+Grain and spice milling machine opera.. |         16        0.04       47.27
+Hairdressers, barbers, beauticians an.. |        110        0.26       47.54
+           Hand launderers and pressers |        271        0.65       48.19
+          Hand or pedal vehicle drivers |         68        0.16       48.35
+Hand packers and other manufacturing .. |        291        0.70       49.05
+Handicraft workers in wood and relate.. |         14        0.03       49.09
+          Heavy truck and lorry drivers |        430        1.04       50.12
+Helpers and cleaners in offices, hote.. |        373        0.90       51.02
+                    Hog raising farmers |        275        0.66       51.68
+       Home-based personal care workers |         14        0.03       51.72
+       Housekeepers and related workers |         18        0.04       51.76
+                   Hunters and trappers |          1        0.00       51.76
+          Hunting and trapping laborers |          1        0.00       51.76
+Incinerator, water treatment and rela.. |          7        0.02       51.78
+                   Industrial engineers |          2        0.00       51.79
+             Industrial robot operators |          1        0.00       51.79
+    Inland and coastal waters fishermen |      1,011        2.43       54.22
+Institution-based personal care workers |         69        0.17       54.39
+                     Insulation workers |          1        0.00       54.39
+              Insurance representatives |         14        0.03       54.42
+     Jewelry and precious metal workers |          3        0.01       54.43
+                               Justices |          4        0.01       54.44
+Labor contractors and employment agents |          1        0.00       54.44
+                                Lawyers |         17        0.04       54.48
+Legal and related business associate .. |          3        0.01       54.49
+                  Legislative officials |         83        0.20       54.69
+    Librarians, archivists and curators |          2        0.00       54.70
+              Library and filing clerks |         16        0.04       54.73
+               Life science technicians |          1        0.00       54.74
+                Lifting truck operators |         17        0.04       54.78
+Lineman, line installers and cable sp.. |         41        0.10       54.88
+              Locomotive engine drivers |          1        0.00       54.88
+                 Machine tool operators |          6        0.01       54.89
+Machine-tool setters and setter opera.. |          3        0.01       54.90
+       Mail carriers and sorting clerks |          7        0.02       54.92
+                 Marine craft mechanics |          4        0.01       54.93
+ Maritime transport service supervisors |          2        0.00       54.93
+      Market and sidewalk stall vendors |        576        1.39       56.32
+  Masons and related concrete finishers |        403        0.97       57.29
+Meat and fish processing machine oper.. |          4        0.01       57.30
+     Mechanical engineering technicians |         24        0.06       57.36
+                   Mechanical engineers |         13        0.03       57.39
+        Mechanical machinery assemblers |         12        0.03       57.42
+                     Medical assistants |          4        0.01       57.43
+                        Medical doctors |         20        0.05       57.47
+            Medical equipment operators |          5        0.01       57.49
+                  Medical technologists |          4        0.01       57.50
+Messengers, package and luggage porte.. |        161        0.39       57.88
+            Metal drawers and extruders |          1        0.00       57.89
+Metal finishing, plating and coating .. |          6        0.01       57.90
+Metal melters, caster and rolling mil.. |          3        0.01       57.91
+           Metal molders and coremakers |          3        0.01       57.91
+Metal, rubber and plastic products as.. |          6        0.01       57.93
+Metal-wheel grinders, polishers and t.. |          1        0.00       57.93
+      Midwifery associate professionals |          4        0.01       57.94
+Mineral ore and stone-processing plan.. |          1        0.00       57.94
+              Miners and quarry workers |         42        0.10       58.04
+Mining and metallurgical engineering .. |          2        0.00       58.05
+          Mining and quarrying laborers |        103        0.25       58.30
+                 Mining-plant operators |          2        0.00       58.30
+        Minor forest products gatherers |         73        0.18       58.48
+Motor vehicle mechanics and related t.. |        162        0.39       58.87
+                     Motorcycle drivers |        496        1.19       60.06
+Motorized farm and forestry plant ope.. |         14        0.03       60.10
+   Musical instrument makers and tuners |          1        0.00       60.10
+                                     NA |      7,536       18.14       78.24
+Non-ordained religious associate prof.. |         45        0.11       78.35
+Nonformal education teaching professi.. |          2        0.00       78.35
+        Nursing associate professionals |          1        0.00       78.35
+               Nutritionists-dietitians |          2        0.00       78.36
+                     Officers, n. e. c. |          2        0.00       78.36
+             Optometrists and opticians |          1        0.00       78.37
+               Ornamental plant growers |         20        0.05       78.41
+Other administrative associate profes.. |         19        0.05       78.46
+                   Other animal raisers |          2        0.00       78.46
+        Other aqua products cultivators |          5        0.01       78.48
+           Other business professionals |         15        0.04       78.51
+Other business services and trade bro.. |          3        0.01       78.52
+           Other computer professionals |         14        0.03       78.55
+   Other creative or performing artists |          2        0.00       78.56
+Other engineers and related professio.. |          1        0.00       78.56
+               Other field crop farmers |         57        0.14       78.70
+Other finance and sales associate pro.. |          2        0.00       78.70
+Other government associate profession.. |          7        0.02       78.72
+Other health associate professionals .. |         10        0.02       78.74
+Other health professionals (except nu.. |          3        0.01       78.75
+         Other life science technicians |         19        0.05       78.80
+                Other livestock farmers |         40        0.10       78.89
+ Other machine operators and assemblers |         22        0.05       78.95
+                    Other office clerks |        164        0.39       79.34
+                  Other orchard farmers |         50        0.12       79.46
+Other personal services workers, n. e.. |         10        0.02       79.48
+Other physical science and engineerin.. |          4        0.01       79.49
+                    Other plant growers |         20        0.05       79.54
+                  Other poultry farmers |         11        0.03       79.57
+                Other sales supervisors |          2        0.00       79.57
+     Other social science professionals |          2        0.00       79.58
+             Other specialized managers |          6        0.01       79.59
+            Other supervisors, n. e. c. |         50        0.12       79.71
+           Other teaching professionals |          3        0.01       79.72
+           Painters and related workers |        183        0.44       80.16
+             Paper pulp plant operators |          2        0.00       80.17
+Paperboard, textile and related produ.. |          3        0.01       80.17
+            Papermaking plant operators |          5        0.01       80.18
+          Pawnbrokers and money lenders |         11        0.03       80.21
+Personal care and related workers, n... |          1        0.00       80.21
+Personnel and human resource developm.. |         12        0.03       80.24
+Personnel and industrial relations ma.. |         25        0.06       80.30
+Petroleum and natural gas refining pl.. |          1        0.00       80.31
+Pharmaceutical and toiletry products .. |          4        0.01       80.31
+              Pharmaceutical assistants |          1        0.00       80.32
+                            Pharmacists |          5        0.01       80.33
+Photographers and image and sound rec.. |          8        0.02       80.35
+       Photographic and related workers |          2        0.00       80.35
+Photographic products machine operators |          2        0.00       80.36
+                       Physiotherapists |          2        0.00       80.36
+     Plastic products machine operators |          7        0.02       80.38
+Plumbers, pipe fitters and other rela.. |         56        0.13       80.51
+       Police inspectors and detectives |         32        0.08       80.59
+                        Police officers |        145        0.35       80.94
+             Postal service supervisors |          1        0.00       80.94
+Potters and related clay and abrasive.. |          3        0.01       80.95
+       Power production plant operators |          3        0.01       80.96
+Pre-elementary education teaching pro.. |          5        0.01       80.97
+Precision instrument makers and repai.. |          2        0.00       80.97
+Pressman letterpresses and related wo.. |         12        0.03       81.00
+                          Prison guards |         13        0.03       81.03
+Production and operations managers in.. |         20        0.05       81.08
+Production and operations managers in.. |         14        0.03       81.12
+Production and operations managers in.. |          5        0.01       81.13
+Production and operations managers in.. |         11        0.03       81.15
+Production and operations managers in.. |          2        0.00       81.16
+Production and operations managers in.. |          8        0.02       81.18
+Production and operations managers in.. |         12        0.03       81.21
+Production and operations managers in.. |         15        0.04       81.24
+                      Production clerks |         11        0.03       81.27
+Production supervisors and general fo.. |        183        0.44       81.71
+                  Professional midwives |          4        0.01       81.72
+                    Professional nurses |         34        0.08       81.80
+Professional, technical and related o.. |          8        0.02       81.82
+   Protective services workers n. e. c. |        640        1.54       83.36
+ Radio, television and other announcers |          6        0.01       83.38
+Rattan, bamboo and other wicker furni.. |         11        0.03       83.40
+   Receptionists and information clerks |         92        0.22       83.62
+                Religious professionals |         29        0.07       83.69
+      Research and development managers |          2        0.00       83.70
+                           Rice farmers |      2,849        6.86       90.56
+             Riggers and cable splicers |          1        0.00       90.56
+                                Roofers |          7        0.02       90.58
+                     Root crops farmers |        393        0.95       91.52
+      Rubber products machine operators |         16        0.04       91.56
+Safety, health and quality inspectors.. |         24        0.06       91.62
+           Sales and marketing managers |         53        0.13       91.75
+      Sales supervisors in retail trade |         26        0.06       91.81
+   Sales supervisors in wholesale trade |          9        0.02       91.83
+                      School principals |         43        0.10       91.93
+      School supervisors and principals |          8        0.02       91.95
+Science and mathematics elementary ed.. |          3        0.01       91.96
+Science and mathematics teaching prof.. |          7        0.02       91.98
+Sculptors, painters and related artists |          5        0.01       91.99
+                   Seaweeds cultivators |         30        0.07       92.06
+                            Secretaries |         52        0.13       92.19
+Senior officials of humanitarian and .. |          3        0.01       92.19
+            Service and related workers |          4        0.01       92.20
+Sewers, Embroiderers and related work.. |         78        0.19       92.39
+               Sewing machine operators |          2        0.00       92.40
+                    Sheet-metal workers |         15        0.04       92.43
+Ship and aircraft controllers and tec.. |          4        0.01       92.44
+  Ship's deck crews and related workers |         20        0.05       92.49
+        Ships' deck officers and pilots |          4        0.01       92.50
+Shoe cleaning and other street servic.. |         13        0.03       92.53
+         Shoemakers and related workers |         12        0.03       92.56
+Shoemaking and related machine operat.. |          1        0.00       92.56
+    Shop salespersons and demonstrators |        611        1.47       94.03
+                Shotfirers and blasters |          1        0.00       94.04
+Silk-screen, block and textile printers |          5        0.01       94.05
+    Social work associate professionals |         76        0.18       94.23
+              Social work professionals |          5        0.01       94.24
+                         Staff officers |          9        0.02       94.26
+          Stall and market salespersons |        164        0.39       94.66
+         Statistical and finance clerks |          8        0.02       94.68
+Statistical, mathematical and related.. |         11        0.03       94.70
+                          Statisticians |          5        0.01       94.72
+              Stenographers and typists |          4        0.01       94.73
+                          Stocks clerks |         76        0.18       94.91
+   Stone splitters, cutters and carvers |          7        0.02       94.93
+                Street ambulant vendors |        263        0.63       95.56
+Street, nightclub and related musicia.. |          8        0.02       95.58
+Structural-metal preparers, erectors .. |         29        0.07       95.65
+     Sugar production machine operators |          8        0.02       95.67
+                      Sugarcane farmers |         38        0.09       95.76
+       Supply and distribution managers |          6        0.01       95.77
+          Sweepers and related laborers |         57        0.14       95.91
+         Systems analysts and designers |          9        0.02       95.93
+       Tailors, dressmakers and hatters |         89        0.21       96.15
+                                Tanners |          1        0.00       96.15
+       Teaching associate professionals |         28        0.07       96.22
+Technical and commercial sales repres.. |         12        0.03       96.24
+Technical and vocational instructors/.. |          4        0.01       96.25
+Technician, skilled, semi-skilled wor.. |          1        0.00       96.26
+Telecommunication equipment installer.. |          5        0.01       96.27
+        Telephone switchboard operators |          1        0.00       96.27
+       Tellers and other counter clerks |         12        0.03       96.30
+Textile and leather products machine .. |          1        0.00       96.30
+Textile, leather and related patternm.. |          7        0.02       96.32
+Tobacco preparers and tobacco product.. |          2        0.00       96.32
+        Tool-makers and related workers |          2        0.00       96.33
+Town planners and related professionals |          6        0.01       96.34
+                          Trade brokers |          4        0.01       96.35
+Traditional chiefs and heads of villa.. |        435        1.05       97.40
+     Traditional medicine practitioners |         15        0.04       97.44
+Transport and communications service .. |         12        0.03       97.47
+                       Transport clerks |         25        0.06       97.53
+                   Transport conductors |         35        0.08       97.61
+      Travel consultants and organizers |          3        0.01       97.62
+                          Travel guides |          4        0.01       97.63
+                       Tree nut farmers |          2        0.00       97.63
+              Undertakers and embalmers |         17        0.04       97.67
+       Upholsterers and related workers |          1        0.00       97.67
+        Varnishers and related painters |         27        0.06       97.74
+                      Vegetable farmers |        504        1.21       98.95
+   Vehicle, window and related cleaners |          1        0.00       98.96
+                          Veterinarians |          2        0.00       98.96
+                  Veterinary assistants |          2        0.00       98.96
+Vocational education teaching profess.. |          6        0.01       98.98
+     Waiters, waitresses and bartenders |        123        0.30       99.28
+  Weavers, knitters and related workers |         19        0.05       99.32
+ Weaving and knitting machine operators |          4        0.01       99.33
+               Welders and flamecutters |        192        0.46       99.79
+Well drillers and borers and related .. |          3        0.01       99.80
+   Wood and related products assemblers |         10        0.02       99.82
+        Wood processing plant operators |         19        0.05       99.87
+        Wood products machine operators |         18        0.04       99.91
+                          Wood treaters |          1        0.00       99.92
+Woodworking machine setters and sette.. |          3        0.01       99.92
+   Word processor and related operators |          3        0.01       99.93
+Workers reporting occupations unident.. |         29        0.07      100.00
+----------------------------------------+-----------------------------------
+                                  Total |     41,544      100.00
+
+. tabulate head_worker_class, missing
+
+         Household Head Class of Worker |      Freq.     Percent        Cum.
+----------------------------------------+-----------------------------------
+Employer in own family-operated farm .. |      2,581        6.21        6.21
+                                     NA |      7,536       18.14       24.35
+     Self-employed without any employee |     13,766       33.14       57.49
+Worked for government/government corp.. |      2,820        6.79       64.28
+       Worked for private establishment |     13,731       33.05       97.33
+           Worked for private household |        811        1.95       99.28
+Worked with pay in own family-operate.. |         14        0.03       99.31
+Worked without pay in own family-oper.. |        285        0.69      100.00
+----------------------------------------+-----------------------------------
+                                  Total |     41,544      100.00
+
+. tabulate toilet_facility, missing
+
+                        Toilet facility |      Freq.     Percent        Cum.
+----------------------------------------+-----------------------------------
+                             Closed pit |      2,273        5.47        5.47
+                                   None |      1,580        3.80        9.27
+                               Open pit |      1,189        2.86       12.14
+                                 Others |        353        0.85       12.99
+Water-sealed, other depository, share.. |        950        2.29       15.27
+Water-sealed, other depository, used .. |      2,343        5.64       20.91
+Water-sealed, sewer septic tank, shar.. |      3,694        8.89       29.80
+Water-sealed, sewer septic tank, used.. |     29,162       70.20      100.00
+----------------------------------------+-----------------------------------
+                                  Total |     41,544      100.00
+
+. 
+. * ---------------------------------------------------- *
+. * Structural missingness
+. * ---------------------------------------------------- *
+. * In this dataset, occupation and class of worker are missing
+. * when the household head reports no job/business.
+. 
+. gen byte flag_occ_missing = missing(head_occupation)
+
+. gen byte flag_workerclass_missing = missing(head_worker_class)
+
+. 
+. tab head_job if flag_occ_missing == 1, missing
+no observations
+
+. tab head_job if flag_workerclass_missing == 1, missing
+no observations
+
+. 
+. * Confirm the pattern found in the source file
+. assert missing(head_occupation) == (head_job == "No Job/Business")
+7,536 contradictions in 41,544 observations
+assertion is false
+r(9);
+
+end of do-file
+
+r(9);
+
+. do "C:\Users\88019\AppData\Local\Temp\STD333c_000000.tmp"
+
+. 
+. 
+. * ---------------------------------------------------- *
+. * Logical consistency checks
+. * ---------------------------------------------------- *
+. gen byte flag_children_gt_hh = ///
+>     members_u5 + members_5_17 > hh_size
+
+. 
+. gen byte flag_employed_gt_hh = ///
+>     employed_members > hh_size
+
+. 
+. gen byte flag_young_head = ///
+>     head_age < 15
+
+. 
+. gen byte flag_toilet_missing = ///
+>     missing(toilet_facility)
+
+. 
+. tab flag_children_gt_hh
+
+flag_childr |
+   en_gt_hh |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     41,529       99.96       99.96
+          1 |         15        0.04      100.00
+------------+-----------------------------------
+      Total |     41,544      100.00
+
+. tab flag_employed_gt_hh
+
+flag_employ |
+   ed_gt_hh |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     41,485       99.86       99.86
+          1 |         59        0.14      100.00
+------------+-----------------------------------
+      Total |     41,544      100.00
+
+. tab flag_young_head
+
+flag_young_ |
+       head |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     41,539       99.99       99.99
+          1 |          5        0.01      100.00
+------------+-----------------------------------
+      Total |     41,544      100.00
+
+. tab flag_toilet_missing
+
+flag_toilet |
+   _missing |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |     41,544      100.00      100.00
+------------+-----------------------------------
+      Total |     41,544      100.00
+
+. 
+. * Inspect flagged records rather than deleting them
+. list hh_id hh_size members_u5 members_5_17 ///
+>     if flag_children_gt_hh == 1, noobs
+
+  +---------------------------------------+
+  | hh_id   hh_size   member~5   membe~17 |
+  |---------------------------------------|
+  |  4620         6          5          3 |
+  |  4790         7          5          3 |
+  |  6392         2          0          3 |
+  | 10039         2          0          5 |
+  | 15374         1          0          3 |
+  |---------------------------------------|
+  | 16353         1          3          0 |
+  | 20508         2          0          3 |
+  | 20954         1          2          2 |
+  | 24346         5          0          7 |
+  | 24708         2          1          4 |
+  |---------------------------------------|
+  | 29198         1          0          4 |
+  | 31742         3          0          4 |
+  | 33240         8          4          8 |
+  | 40663         6          1          7 |
+  | 40730         6          1          6 |
+  +---------------------------------------+
+
+. 
+. list hh_id hh_size employed_members ///
+>     if flag_employed_gt_hh == 1, noobs
+
+  +----------------------------+
+  | hh_id   hh_size   employ~s |
+  |----------------------------|
+  |  1482         1          2 |
+  |  1948         2          3 |
+  |  2016         1          2 |
+  |  2467         3          5 |
+  |  2562         1          2 |
+  |----------------------------|
+  |  2914         2          3 |
+  |  3624         2          3 |
+  |  3699         1          2 |
+  |  3765         1          2 |
+  |  4109         1          4 |
+  |----------------------------|
+  |  4512         1          2 |
+  |  5149         2          3 |
+  |  6394         1          4 |
+  |  6589         3          5 |
+  |  8448         4          5 |
+  |----------------------------|
+  |  8452         3          4 |
+  |  8495         2          3 |
+  |  8817         2          3 |
+  |  9221         1          2 |
+  |  9972         3          4 |
+  |----------------------------|
+  | 10273         1          2 |
+  | 11306         1          2 |
+  | 11323         1          2 |
+  | 11493         1          2 |
+  | 13314         2          3 |
+  |----------------------------|
+  | 13369         2          4 |
+  | 13372         1          2 |
+  | 14928         4          6 |
+  | 15136         1          4 |
+  | 15467         2          3 |
+  |----------------------------|
+  | 15486         1          2 |
+  | 15734         2          3 |
+  | 15817         4          5 |
+  | 15845         5          6 |
+  | 16330         3          4 |
+  |----------------------------|
+  | 16485         3          4 |
+  | 20387         2          3 |
+  | 23028         1          2 |
+  | 26237         1          2 |
+  | 26732         3          4 |
+  |----------------------------|
+  | 26742         1          2 |
+  | 27986         1          2 |
+  | 28193         2          3 |
+  | 29932         1          2 |
+  | 30017         4          5 |
+  |----------------------------|
+  | 30247         2          3 |
+  | 30411         2          3 |
+  | 30559         1          2 |
+  | 30761         1          2 |
+  | 30803         2          3 |
+  |----------------------------|
+  | 31212         1          2 |
+  | 31363         2          3 |
+  | 36297         1          2 |
+  | 36696         3          5 |
+  | 38019         2          3 |
+  |----------------------------|
+  | 39489         4          5 |
+  | 39523         2          3 |
+  | 39800         3          4 |
+  | 39804         3          4 |
+  +----------------------------+
+
+. 
+. list hh_id head_age hh_size ///
+>     if flag_young_head == 1, noobs
+
+  +----------------------------+
+  | hh_id   head_age   hh_size |
+  |----------------------------|
+  |  3316         10         2 |
+  |  6037         13         2 |
+  |  7303         14         4 |
+  | 32112          9         1 |
+  | 38307         13         1 |
+  +----------------------------+
+
+. 
+. * Keep all records; flags remain available for analysis decisions
+. save "$ROOT/data/clean/03_validated.dta", replace
+(file D:\Stata Projects\Project 2\stata-fies-simple-portfolio/data/clean/03_validated.dta not found)
+file D:\Stata Projects\Project 2\stata-fies-simple-portfolio/data/clean/03_validated.dta saved
+
+. 
+. display as result "Validation complete. Suspicious records were flagged, not deleted."
+Validation complete. Suspicious records were flagged, not deleted.
+
+. 
+. log close
+      name:  <unnamed>
+       log:  D:\Stata Projects\Project 2\stata-fies-simple-portfolio/logs/03_validate_data.log
+  log type:  text
+ closed on:  18 Aug 2026, 15:45:21
+------------------------------------------------------------------------------------------------------------------

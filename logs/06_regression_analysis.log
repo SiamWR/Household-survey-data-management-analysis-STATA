@@ -1,0 +1,145 @@
+------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  D:\Stata Projects\Project 2\stata-fies-simple-portfolio/logs/06_regression_analysis.log
+  log type:  text
+ opened on:  18 Aug 2026, 16:39:27
+
+. 
+. use "$ROOT/data/clean/04_analysis_ready.dta", clear
+
+. 
+. 
+. * Main model
+. * Outcome: log household income
+. 
+. * The Kaggle extract does not provide identifiable survey
+. * weights, strata, or PSU variables, so this is an unweighted
+. * model with heteroskedasticity-robust standard errors.
+. 
+. reg ln_income ///
+>     i.head_sex_id ///
+>     c.head_age##c.head_age ///
+>     c.hh_size ///
+>     c.employed_members ///
+>     i.income_source_id ///
+>     i.region_id ///
+>     if flag_employed_gt_hh == 0, ///
+>     vce(robust)
+
+Linear regression                               Number of obs     =     41,485
+                                                F(23, 41461)      =     681.83
+                                                Prob > F          =     0.0000
+                                                R-squared         =     0.2397
+                                                Root MSE          =     .67227
+
+-------------------------------------------------------------------------------------------
+                          |               Robust
+                ln_income | Coefficient  std. err.      t    P>|t|     [95% conf. interval]
+--------------------------+----------------------------------------------------------------
+              head_sex_id |
+                    Male  |  -.0592713    .009203    -6.44   0.000    -.0773093   -.0412332
+                 head_age |   .0329425   .0014887    22.13   0.000     .0300246    .0358604
+                          |
+    c.head_age#c.head_age |  -.0002878   .0000144   -20.01   0.000     -.000316   -.0002597
+                          |
+                  hh_size |   .0721925   .0016959    42.57   0.000     .0688685    .0755164
+         employed_members |   .1003251   .0039452    25.43   0.000     .0925925    .1080578
+                          |
+         income_source_id |
+ Other sources of Income  |   .0301556   .0105664     2.85   0.004     .0094453    .0508659
+           Wage/Salaries  |  -.0096251   .0096269    -1.00   0.317     -.028494    .0092437
+                          |
+                region_id |
+                     CAR  |   .4620132   .0204274    22.62   0.000      .421975    .5020513
+                  Caraga  |   .1591781   .0195425     8.15   0.000     .1208743    .1974818
+       I - Ilocos Region  |   .3858472   .0174379    22.13   0.000     .3516686    .4200258
+     II - Cagayan Valley  |   .3656931   .0181599    20.14   0.000     .3300992    .4012869
+     III - Central Luzon  |   .5756952   .0160824    35.80   0.000     .5441733    .6072171
+        IVA - CALABARZON  |   .6144658   .0154655    39.73   0.000      .584153    .6447785
+          IVB - MIMAROPA  |   .2462952   .0232015    10.62   0.000     .2008197    .2917707
+IX - Zamboanga Peninsula  |   .1434278   .0191491     7.49   0.000     .1058952    .1809605
+                     NCR  |   .9583124   .0151427    63.29   0.000     .9286324    .9879924
+        V - Bicol Region  |   .1393417   .0164401     8.48   0.000     .1071187    .1715647
+    VI - Western Visayas  |   .2518316   .0168093    14.98   0.000     .2188851    .2847782
+   VII - Central Visayas  |   .2593276   .0187028    13.87   0.000     .2226696    .2959855
+  VIII - Eastern Visayas  |   .1143517   .0181087     6.31   0.000     .0788583    .1498451
+   X - Northern Mindanao  |   .1846536   .0204872     9.01   0.000     .1444982     .224809
+       XI - Davao Region  |   .3755594    .017453    21.52   0.000     .3413511    .4097677
+      XII - SOCCSKSARGEN  |    .062073   .0191721     3.24   0.001     .0244953    .0996507
+                          |
+                    _cons |   10.42944   .0379369   274.92   0.000     10.35508     10.5038
+-------------------------------------------------------------------------------------------
+
+. 
+. * Basic model checks
+. estat vif
+
+    Variable |       VIF       1/VIF  
+-------------+----------------------
+2.head_sex~d |      1.15    0.873346
+    head_age |     39.65    0.025224
+  c.head_age#|
+  c.head_age |     40.28    0.024829
+     hh_size |      1.34    0.746338
+employed_m~s |      1.79    0.559189
+income_sou~d |
+          2  |      1.79    0.559588
+          3  |      2.14    0.467840
+   region_id |
+          2  |      1.81    0.551042
+          3  |      1.82    0.550130
+          4  |      2.11    0.474393
+          5  |      2.04    0.489302
+          6  |      2.50    0.399644
+          7  |      2.89    0.345478
+          8  |      1.58    0.634808
+          9  |      1.81    0.552715
+         10  |      2.90    0.344535
+         11  |      2.12    0.472332
+         12  |      2.33    0.428831
+         13  |      2.18    0.459756
+         14  |      2.06    0.485046
+         15  |      1.88    0.532183
+         16  |      2.12    0.472751
+         17  |      1.96    0.510684
+-------------+----------------------
+    Mean VIF |      5.31
+
+. 
+. predict residual if e(sample), residuals
+(59 missing values generated)
+
+. predict fitted if e(sample), xb
+(59 missing values generated)
+
+. 
+. rvfplot, yline(0) ///
+>     title("Residuals versus Fitted Values")
+
+. 
+. graph export "$ROOT/output/figures/04_residual_fitted.png", ///
+>     replace width(1800)
+(file D:\Stata Projects\Project 2\stata-fies-simple-portfolio/output/figures/04_residual_fitted.png not found)
+file D:\Stata Projects\Project 2\stata-fies-simple-portfolio/output/figures/04_residual_fitted.png saved as PNG
+    format
+
+. 
+. * Save the estimation results
+. estimates save "$ROOT/output/tables/income_model.ster", replace
+(note: file D:\Stata Projects\Project 2\stata-fies-simple-portfolio/output/tables/income_model.ster not found)
+file D:\Stata Projects\Project 2\stata-fies-simple-portfolio/output/tables/income_model.ster saved
+
+. 
+. display as result "Regression completed."
+Regression completed.
+
+. display as result "Interpret results as associations, not causal effects."
+Interpret results as associations, not causal effects.
+
+. 
+. log close
+      name:  <unnamed>
+       log:  D:\Stata Projects\Project 2\stata-fies-simple-portfolio/logs/06_regression_analysis.log
+  log type:  text
+ closed on:  18 Aug 2026, 16:39:33
+------------------------------------------------------------------------------------------------------------------

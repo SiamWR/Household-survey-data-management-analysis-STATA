@@ -1,0 +1,1186 @@
+------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  D:\Stata Projects\Project 2\stata-fies-simple-portfolio/logs/01_setup_and_audit.log
+  log type:  text
+ opened on:  18 Aug 2026, 14:27:12
+
+. 
+. * Import raw CSV
+. import delimited "$ROOT/data/raw/Family Income and Expenditure.csv", ///
+>     clear varnames(1) case(preserve)
+(encoding automatically selected: ISO-8859-1)
+(60 vars, 41,544 obs)
+
+. 
+. display as text "Rows: " _N
+Rows: 41544
+
+. display as text "Columns: " c(k)
+Columns: 60
+
+. 
+. * Check that the expected dataset was imported
+. assert _N == 41544
+
+. assert c(k) == 60
+
+. 
+. * Core inspection
+. describe
+
+Contains data
+ Observations:        41,544                  
+    Variables:            60                  
+------------------------------------------------------------------------------------------------------------------
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
+------------------------------------------------------------------------------------------------------------------
+TotalHousehol~e long    %12.0g                Total Household Income
+Region          str25   %25s                  
+TotalFoodExpe~e long    %12.0g                Total Food Expenditure
+MainSourceofI~e str26   %26s                  Main Source of Income
+AgriculturalH~r byte    %8.0g                 Agricultural Household indicator
+BreadandCerea~e long    %12.0g                Bread and Cereals Expenditure
+TotalRiceExpe~e long    %12.0g                Total Rice Expenditure
+MeatExpenditure long    %12.0g                Meat Expenditure
+TotalFishandm~d long    %12.0g                Total Fish and marine products Expenditure
+FruitExpendit~e long    %8.0g                 Fruit Expenditure
+VegetablesExp~e long    %8.0g                 Vegetables Expenditure
+Restaurantand~e long    %12.0g                Restaurant and hotels Expenditure
+AlcoholicBeve~e long    %8.0g                 Alcoholic Beverages Expenditure
+TobaccoExpend~e long    %8.0g                 Tobacco Expenditure
+ClothingFootw~e long    %12.0g                Clothing, Footwear and Other Wear Expenditure
+Housingandwat~e long    %12.0g                Housing and water Expenditure
+ImputedHouseR~e long    %12.0g                Imputed House Rental Value
+MedicalCareEx~e long    %12.0g                Medical Care Expenditure
+Transportatio~e long    %12.0g                Transportation Expenditure
+Communication~e long    %12.0g                Communication Expenditure
+EducationExpe~e long    %12.0g                Education Expenditure
+Miscellaneous~p long    %12.0g                Miscellaneous Goods and Services Expenditure
+SpecialOccasi~e long    %12.0g                Special Occasions Expenditure
+CropFarmingan~s long    %12.0g                Crop Farming and Gardening expenses
+TotalIncomefr~c long    %12.0g                Total Income from Entrepreneurial Acitivites
+HouseholdHead~x str6    %9s                   Household Head Sex
+HouseholdHead~e byte    %8.0g                 Household Head Age
+HouseholdHead~s str18   %18s                  Household Head Marital Status
+HouseholdHead~t strL    %9s                   Household Head Highest Grade Completed
+HouseholdHead~a str17   %17s                  Household Head Job or Business Indicator
+HouseholdHead~n str99   %99s                  Household Head Occupation
+HouseholdHead~r str58   %58s                  Household Head Class of Worker
+TypeofHousehold str38   %38s                  Type of Household
+TotalNumberof~s byte    %8.0g                 Total Number of Family members
+Memberswit~rold byte    %8.0g                 Members with age less than 5 year old
+Memberswit~sold byte    %8.0g                 Members with age 5 - 17 years old
+Totalnumberof~y byte    %8.0g                 Total number of family members employed
+TypeofBuildin~e str43   %43s                  Type of Building/House
+TypeofRoof      str70   %70s                  Type of Roof
+TypeofWalls     str14   %14s                  Type of Walls
+HouseFloorArea  int     %8.0g                 House Floor Area
+HouseAge        int     %8.0g                 House Age
+Numberofbedro~s byte    %8.0g                 Number of bedrooms
+TenureStatus    str49   %49s                  Tenure Status
+ToiletFacilit~s str62   %62s                  Toilet Facilities
+Electricity     byte    %8.0g                 
+MainSourceofW~y str39   %39s                  Main Source of Water Supply
+NumberofTelev~n byte    %8.0g                 Number of Television
+NumberofCDVCD~D byte    %8.0g                 Number of CD/VCD/DVD
+NumberofCompo~t byte    %8.0g                 Number of Component/Stereo set
+NumberofRefri~r byte    %8.0g                 Number of Refrigerator/Freezer
+NumberofWashi~e byte    %8.0g                 Number of Washing Machine
+NumberofAirco~r byte    %8.0g                 Number of Airconditioner
+NumberofCarJe~n byte    %8.0g                 Number of Car, Jeep, Van
+NumberofLandl~n byte    %8.0g                 Number of Landline/wireless telephones
+NumberofCellu~e byte    %8.0g                 Number of Cellular phone
+NumberofPerso~r byte    %8.0g                 Number of Personal Computer
+NumberofStove~e byte    %8.0g                 Number of Stove with Oven/Gas Range
+NumberofMotor~a byte    %8.0g                 Number of Motorized Banca
+NumberofMotor~e byte    %8.0g                 Number of Motorcycle/Tricycle
+------------------------------------------------------------------------------------------------------------------
+Sorted by: 
+     Note: Dataset has changed since last saved.
+
+. summarize
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+TotalHouse~e |     41,544    247555.6    286880.5      11285   1.18e+07
+      Region |          0
+TotalFoodE~e |     41,544    85099.16    51637.95       2947     827565
+MainSource~e |          0
+Agricultur~r |     41,544    .4298575    .6766665          0          2
+-------------+---------------------------------------------------------
+BreadandCe~e |     41,544    25133.72    13466.48          0     765864
+TotalRiceE~e |     41,544    18195.83    11727.22          0     758326
+MeatExpend~e |     41,544    10540.07    10497.73          0     261566
+TotalFisha~d |     41,544    10529.32    7812.202          0     188208
+FruitExpen~e |     41,544    2550.475    2969.753          0     273769
+-------------+---------------------------------------------------------
+Vegetables~e |     41,544    5006.919    3300.175          0      74800
+Restaurant~e |     41,544    15436.57     23705.2          0     725296
+AlcoholicB~e |     41,544    1085.068    2174.432          0      59592
+TobaccoExp~e |     41,544    2294.736    3998.977          0     139370
+ClothingFo~e |     41,544    4954.621    7496.501          0     356750
+-------------+---------------------------------------------------------
+Housingand~e |     41,544    38375.47    53111.68       1950    2188560
+ImputedHou~e |     41,544    20921.54    39371.52          0    1920000
+MedicalCar~e |     41,544    7160.231       26902          0    1049275
+Transporta~e |     41,544    11806.34    19351.21          0     834996
+Communicat~e |     41,544    4095.492    7298.823          0     149940
+-------------+---------------------------------------------------------
+EducationE~e |     41,544      7473.5    21219.17          0     731000
+Miscellane~p |     41,544    12522.07    17547.03          0     553560
+SpecialOcc~e |     41,544    5265.726    13279.59          0     556700
+CropFarmin~s |     41,544    13816.86    47643.78          0    3729973
+TotalIncom~c |     41,544    54376.24    147142.8          0    9234485
+-------------+---------------------------------------------------------
+HouseholdH~x |          0
+HouseholdH~e |     41,544    51.38145    14.16608          9         99
+HouseholdH~s |          0
+HouseholdH~t |          0
+HouseholdH~a |          0
+-------------+---------------------------------------------------------
+HouseholdH~n |          0
+HouseholdH~r |          0
+TypeofHous~d |          0
+TotalNumbe~s |     41,544    4.635182    2.280252          1         26
+Members~rold |     41,544    .4102157    .6943901          0          5
+-------------+---------------------------------------------------------
+Members~sold |     41,544    1.362579       1.408          0          8
+Totalnumbe~y |     41,544    1.272699    1.149152          0          8
+TypeofBuil~e |          0
+  TypeofRoof |          0
+ TypeofWalls |          0
+-------------+---------------------------------------------------------
+HouseFloor~a |     41,544    55.60336    55.02316          5        998
+    HouseAge |     41,544    20.12551    14.29545          0        200
+Numberofbe~s |     41,544    1.788008    1.105664          0          9
+TenureStatus |          0
+ToiletFaci~s |          0
+-------------+---------------------------------------------------------
+ Electricity |     41,544    .8908146    .3118755          0          1
+MainSource~y |          0
+NumberofTe~n |     41,544    .8568746    .6463058          0          6
+NumberofCD~D |     41,544    .4352253    .5601248          0          5
+NumberofCo~t |     41,544    .1621413    .3891079          0          5
+-------------+---------------------------------------------------------
+NumberofRe~r |     41,544    .3941845    .5370251          0          5
+NumberofWa~e |     41,544    .3198055     .478482          0          3
+NumberofAi~r |     41,544    .1298142    .4486729          0          5
+NumberofCa~n |     41,544    .0812151    .3467859          0          5
+NumberofLa~n |     41,544    .0606104    .2767318          0          4
+-------------+---------------------------------------------------------
+NumberofCe~e |     41,544    1.905738     1.55813          0         10
+NumberofPe~r |     41,544    .3150154    .7396982          0          6
+NumberofSt~e |     41,544    .1350376    .3540828          0          3
+NumberofMo~a |     41,544    .0131186    .1271708          0          3
+NumberofMo~e |     41,544    .2898854    .5584078          0          5
+
+. codebook
+
+------------------------------------------------------------------------------------------------------------------
+TotalHouseholdIncome                                                                        Total Household Income
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (long)
+
+                 Range: [11285,11815988]              Units: 1
+         Unique values: 38,670                    Missing .: 0/41,544
+
+                  Mean: 247556
+             Std. dev.: 286881
+
+           Percentiles:    10%       25%       50%       75%       90%
+                         71595    104895    164080    291139    502030
+
+------------------------------------------------------------------------------------------------------------------
+Region                                                                                                 (unlabeled)
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: String (str25)
+
+         Unique values: 17                        Missing "": 0/41,544
+
+              Examples: "II - Cagayan Valley"
+                        "IVA - CALABARZON"
+                        "V - Bicol Region"
+                        "VIII - Eastern Visayas"
+
+               Warning: Variable has leading and embedded blanks.
+
+------------------------------------------------------------------------------------------------------------------
+TotalFoodExpenditure                                                                        Total Food Expenditure
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (long)
+
+                 Range: [2947,827565]                 Units: 1
+         Unique values: 35,776                    Missing .: 0/41,544
+
+                  Mean: 85099.2
+             Std. dev.: 51637.9
+
+           Percentiles:     10%       25%       50%       75%       90%
+                          35653   51016.5   72985.5    105636    148260
+
+------------------------------------------------------------------------------------------------------------------
+MainSourceofIncome                                                                           Main Source of Income
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: String (str26)
+
+         Unique values: 3                         Missing "": 0/41,544
+
+            Tabulation: Freq.  Value
+                       10,320  "Enterpreneurial Activities"
+                       10,836  "Other sources of Income"
+                       20,388  "Wage/Salaries"
+
+               Warning: Variable has embedded blanks.
+
+------------------------------------------------------------------------------------------------------------------
+AgriculturalHouseholdindicator                                                    Agricultural Household indicator
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (byte)
+
+                 Range: [0,2]                         Units: 1
+         Unique values: 3                         Missing .: 0/41,544
+
+            Tabulation: Freq.  Value
+                       28,106  0
+                        9,018  1
+                        4,420  2
+
+------------------------------------------------------------------------------------------------------------------
+BreadandCerealsExpenditure                                                           Bread and Cereals Expenditure
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (long)
+
+                 Range: [0,765864]                    Units: 1
+         Unique values: 26,082                    Missing .: 0/41,544
+
+                  Mean: 25133.7
+             Std. dev.: 13466.5
+
+           Percentiles:     10%       25%       50%       75%       90%
+                          11487     16556     23324     31440     40385
+
+------------------------------------------------------------------------------------------------------------------
+TotalRiceExpenditure                                                                        Total Rice Expenditure
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (long)
+
+                 Range: [0,758326]                    Units: 1
+         Unique values: 16,145                    Missing .: 0/41,544
+
+                  Mean: 18195.8
+             Std. dev.: 11727.2
+
+           Percentiles:     10%       25%       50%       75%       90%
+                           6188     11020     16620     23920     31485
+
+------------------------------------------------------------------------------------------------------------------
+MeatExpenditure                                                                                   Meat Expenditure
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (long)
+
+                 Range: [0,261566]                    Units: 1
+         Unique values: 18,619                    Missing .: 0/41,544
+
+                  Mean: 10540.1
+             Std. dev.: 10497.7
+
+           Percentiles:     10%       25%       50%       75%       90%
+                           1510    3353.5    7332.5     14292     23697
+
+------------------------------------------------------------------------------------------------------------------
+TotalFishandmarineproductsExpend                                       Total Fish and  marine products Expenditure
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (long)
+
+                 Range: [0,188208]                    Units: 1
+         Unique values: 18,014                    Missing .: 0/41,544
+
+                  Mean: 10529.3
+             Std. dev.:  7812.2
+
+           Percentiles:     10%       25%       50%       75%       90%
+                           3461      5504      8695     13388     19431
+
+------------------------------------------------------------------------------------------------------------------
+FruitExpenditure                                                                                 Fruit Expenditure
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (long)
+
+                 Range: [0,273769]                    Units: 1
+         Unique values: 7,140                     Missing .: 0/41,544
+
+                  Mean: 2550.47
+             Std. dev.: 2969.75
+
+           Percentiles:     10%       25%       50%       75%       90%
+                            583    1024.5      1820      3100      5190
+
+------------------------------------------------------------------------------------------------------------------
+VegetablesExpenditure                                                                       Vegetables Expenditure
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (long)
+
+                 Range: [0,74800]                     Units: 1
+         Unique values: 10,599                    Missing .: 0/41,544
+
+                  Mean: 5006.92
+             Std. dev.: 3300.18
+
+           Percentiles:     10%       25%       50%       75%       90%
+                           1861      2873      4314    6304.5      8854
+
+------------------------------------------------------------------------------------------------------------------
+RestaurantandhotelsExpenditure                                                   Restaurant and hotels Expenditure
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (long)
+
+                 Range: [0,725296]                    Units: 1
+         Unique values: 12,367                    Missing .: 0/41,544
+
+                  Mean: 15436.6
+             Std. dev.: 23705.2
+
+           Percentiles:     10%       25%       50%       75%       90%
+                            120      1930      7314   19922.5     39631
+
+------------------------------------------------------------------------------------------------------------------
+AlcoholicBeveragesExpenditure                                                      Alcoholic Beverages Expenditure
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (long)
+
+                 Range: [0,59592]                     Units: 1
+         Unique values: 4,084                     Missing .: 0/41,544
+
+                  Mean: 1085.07
+             Std. dev.: 2174.43
+
+           Percentiles:     10%       25%       50%       75%       90%
+                              0         0       270    1299.5      3000
+
+------------------------------------------------------------------------------------------------------------------
+TobaccoExpenditure                                                                             Tobacco Expenditure
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (long)
+
+                 Range: [0,139370]                    Units: 1
+         Unique values: 3,118                     Missing .: 0/41,544
+
+                  Mean: 2294.74
+             Std. dev.: 3998.98
+
+           Percentiles:     10%       25%       50%       75%       90%
+                              0         0       300      3147      7240
+
+------------------------------------------------------------------------------------------------------------------
+ClothingFootwearandOtherWearExpe                                     Clothing, Footwear and Other Wear Expenditure
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (long)
+
+                 Range: [0,356750]                    Units: 1
+         Unique values: 9,819                     Missing .: 0/41,544
+
+                  Mean: 4954.62
+             Std. dev.:  7496.5
+
+           Percentiles:     10%       25%       50%       75%       90%
+                            650      1365      2740      5580     11126
+
+------------------------------------------------------------------------------------------------------------------
+HousingandwaterExpenditure                                                           Housing and water Expenditure
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (long)
+
+                 Range: [1950,2188560]                Units: 1
+         Unique values: 13,243                    Missing .: 0/41,544
+
+                  Mean: 38375.5
+             Std. dev.: 53111.7
+
+           Percentiles:     10%       25%       50%       75%       90%
+                           8832     13080     22992     45948     80520
+
+------------------------------------------------------------------------------------------------------------------
+ImputedHouseRentalValue                                                                 Imputed House Rental Value
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (long)
+
+                 Range: [0,1920000]                   Units: 1
+         Unique values: 266                       Missing .: 0/41,544
+
+                  Mean: 20921.5
+             Std. dev.: 39371.5
+
+           Percentiles:     10%       25%       50%       75%       90%
+                           3000      6000     10800     24000     48000
+
+------------------------------------------------------------------------------------------------------------------
+MedicalCareExpenditure                                                                    Medical Care Expenditure
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (long)
+
+                 Range: [0,1049275]                   Units: 1
+         Unique values: 11,887                    Missing .: 0/41,544
+
+                  Mean: 7160.23
+             Std. dev.:   26902
+
+           Percentiles:     10%       25%       50%       75%       90%
+                             92       300      1125      4680     15288
+
+------------------------------------------------------------------------------------------------------------------
+TransportationExpenditure                                                               Transportation Expenditure
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (long)
+
+                 Range: [0,834996]                    Units: 1
+         Unique values: 7,435                     Missing .: 0/41,544
+
+                  Mean: 11806.3
+             Std. dev.: 19351.2
+
+           Percentiles:     10%       25%       50%       75%       90%
+                           1026      2412      6036     13776     27492
+
+------------------------------------------------------------------------------------------------------------------
+CommunicationExpenditure                                                                 Communication Expenditure
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (long)
+
+                 Range: [0,149940]                    Units: 1
+         Unique values: 3,826                     Missing .: 0/41,544
+
+                  Mean: 4095.49
+             Std. dev.: 7298.82
+
+           Percentiles:     10%       25%       50%       75%       90%
+                              0       564      1506      3900     11280
+
+------------------------------------------------------------------------------------------------------------------
+EducationExpenditure                                                                         Education Expenditure
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (long)
+
+                 Range: [0,731000]                    Units: 1
+         Unique values: 6,893                     Missing .: 0/41,544
+
+                  Mean:  7473.5
+             Std. dev.: 21219.2
+
+           Percentiles:     10%       25%       50%       75%       90%
+                              0         0       880      4060     21350
+
+------------------------------------------------------------------------------------------------------------------
+MiscellaneousGoodsandServicesExp                                      Miscellaneous Goods and Services Expenditure
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (long)
+
+                 Range: [0,553560]                    Units: 1
+         Unique values: 7,669                     Missing .: 0/41,544
+
+                  Mean: 12522.1
+             Std. dev.:   17547
+
+           Percentiles:     10%       25%       50%       75%       90%
+                           2232      3792      6804     14154     28818
+
+------------------------------------------------------------------------------------------------------------------
+SpecialOccasionsExpenditure                                                          Special Occasions Expenditure
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (long)
+
+                 Range: [0,556700]                    Units: 1
+         Unique values: 3,412                     Missing .: 0/41,544
+
+                  Mean: 5265.73
+             Std. dev.: 13279.6
+
+           Percentiles:     10%       25%       50%       75%       90%
+                              0         0      1500      5000     12750
+
+------------------------------------------------------------------------------------------------------------------
+CropFarmingandGardeningexpenses                                                Crop Farming and Gardening expenses
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (long)
+
+                 Range: [0,3729973]                   Units: 1
+         Unique values: 9,961                     Missing .: 0/41,544
+
+                  Mean: 13816.9
+             Std. dev.: 47643.8
+
+           Percentiles:     10%       25%       50%       75%       90%
+                              0         0         0    6313.5     45114
+
+------------------------------------------------------------------------------------------------------------------
+TotalIncomefromEntrepreneurialAc                                      Total Income from Entrepreneurial Acitivites
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (long)
+
+                 Range: [0,9234485]                   Units: 1
+         Unique values: 20,204                    Missing .: 0/41,544
+
+                  Mean: 54376.2
+             Std. dev.:  147143
+
+           Percentiles:     10%       25%       50%       75%       90%
+                              0         0     19222   65972.5    126932
+
+------------------------------------------------------------------------------------------------------------------
+HouseholdHeadSex                                                                                Household Head Sex
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: String (str6)
+
+         Unique values: 2                         Missing "": 0/41,544
+
+            Tabulation: Freq.  Value
+                        9,061  "Female"
+                       32,483  "Male"
+
+------------------------------------------------------------------------------------------------------------------
+HouseholdHeadAge                                                                                Household Head Age
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (byte)
+
+                 Range: [9,99]                        Units: 1
+         Unique values: 89                        Missing .: 0/41,544
+
+                  Mean: 51.3815
+             Std. dev.: 14.1661
+
+           Percentiles:     10%       25%       50%       75%       90%
+                             33        41        51        61        71
+
+------------------------------------------------------------------------------------------------------------------
+HouseholdHeadMaritalStatus                                                           Household Head Marital Status
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: String (str18)
+
+         Unique values: 6                         Missing "": 0/41,544
+
+            Tabulation: Freq.  Value
+                           11  "Annulled"
+                        1,425  "Divorced/Separated"
+                       31,347  "Married"
+                        1,942  "Single"
+                            1  "Unknown"
+                        6,818  "Widowed"
+
+------------------------------------------------------------------------------------------------------------------
+HouseholdHeadHighestGradeComplet                                            Household Head Highest Grade Completed
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: String (strL)
+
+         Unique values: 46                        Missing "": 0/41,544
+
+              Examples: "Elementary Graduate"
+                        "Grade 3"
+                        "High School Graduate"
+                        "No Grade Completed"
+
+               Warning: Variable has embedded blanks.
+
+------------------------------------------------------------------------------------------------------------------
+HouseholdHeadJoborBusinessIndica                                          Household Head Job or Business Indicator
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: String (str17)
+
+         Unique values: 2                         Missing "": 0/41,544
+
+            Tabulation: Freq.  Value
+                        7,536  "No Job/Business"
+                       34,008  "With Job/Business"
+
+               Warning: Variable has embedded blanks.
+
+------------------------------------------------------------------------------------------------------------------
+HouseholdHeadOccupation                                                                  Household Head Occupation
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: String (str99)
+
+         Unique values: 379                       Missing "": 0/41,544
+
+              Examples: "Doorkeepers, watchpersons and related workers"
+                        "General managers/managing proprietors in wholesale
+                        and retail trade"
+                        "Motorcycle drivers"
+                        "Painters and related workers"
+
+               Warning: Variable has embedded blanks.
+
+------------------------------------------------------------------------------------------------------------------
+HouseholdHeadClassofWorker                                                          Household Head Class of Worker
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: String (str58)
+
+         Unique values: 8                         Missing "": 0/41,544
+
+            Tabulation: Freq.  Value
+                        2,581  "Employer in own family-operated farm
+                               or business"
+                        7,536  "NA"
+                       13,766  "Self-employed wihout any employee"
+                        2,820  "Worked for government/government
+                               corporation"
+                       13,731  "Worked for private establishment"
+                          811  "Worked for private household"
+                           14  "Worked with pay in own family-operated
+                               farm or business"
+                          285  "Worked without pay in own
+                               family-operated farm or business"
+
+               Warning: Variable has embedded blanks.
+
+------------------------------------------------------------------------------------------------------------------
+TypeofHousehold                                                                                  Type of Household
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: String (str38)
+
+         Unique values: 3                         Missing "": 0/41,544
+
+            Tabulation: Freq.  Value
+                       12,932  "Extended Family"
+                       28,445  "Single Family"
+                          167  "Two or More Nonrelated
+                               Persons/Members"
+
+               Warning: Variable has embedded blanks.
+
+------------------------------------------------------------------------------------------------------------------
+TotalNumberofFamilymembers                                                          Total Number of Family members
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (byte)
+
+                 Range: [1,26]                        Units: 1
+         Unique values: 21                        Missing .: 0/41,544
+
+                  Mean: 4.63518
+             Std. dev.: 2.28025
+
+           Percentiles:     10%       25%       50%       75%       90%
+                              2         3         4         6         8
+
+------------------------------------------------------------------------------------------------------------------
+Memberswithagelessthan5yearold                                               Members with age less than 5 year old
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (byte)
+
+                 Range: [0,5]                         Units: 1
+         Unique values: 6                         Missing .: 0/41,544
+
+            Tabulation: Freq.  Value
+                       28,705  0
+                        9,317  1
+                        2,933  2
+                          511  3
+                           64  4
+                           14  5
+
+------------------------------------------------------------------------------------------------------------------
+Memberswithage517yearsold                                                        Members with age 5 - 17 years old
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (byte)
+
+                 Range: [0,8]                         Units: 1
+         Unique values: 9                         Missing .: 0/41,544
+
+            Tabulation: Freq.  Value
+                       14,802  0
+                       10,445  1
+                        8,111  2
+                        4,704  3
+                        2,152  4
+                          896  5
+                          318  6
+                           96  7
+                           20  8
+
+------------------------------------------------------------------------------------------------------------------
+Totalnumberoffamilymembersemploy                                           Total number of family members employed
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (byte)
+
+                 Range: [0,8]                         Units: 1
+         Unique values: 9                         Missing .: 0/41,544
+
+            Tabulation: Freq.  Value
+                       11,494  0
+                       15,312  1
+                        9,303  2
+                        3,579  3
+                        1,280  4
+                          415  5
+                          116  6
+                           33  7
+                           12  8
+
+------------------------------------------------------------------------------------------------------------------
+TypeofBuildingHouse                                                                         Type of Building/House
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: String (str43)
+
+         Unique values: 6                         Missing "": 0/41,544
+
+            Tabulation: Freq.  Value
+                           51  "Commercial/industrial/agricultural
+                               building"
+                        1,084  "Duplex"
+                            9  "Institutional living quarter"
+                        1,329  "Multi-unit residential"
+                            2  "Other building unit (e.g. cave, boat)"
+                       39,069  "Single house"
+
+               Warning: Variable has embedded blanks.
+
+------------------------------------------------------------------------------------------------------------------
+TypeofRoof                                                                                            Type of Roof
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: String (str70)
+
+         Unique values: 7                         Missing "": 0/41,544
+
+            Tabulation: Freq.  Value
+                        5,074  "Light material (cogon,nipa,anahaw)"
+                          846  "Mixed but predominantly light
+                               materials"
+                           56  "Mixed but predominantly salvaged
+                               materials"
+                        2,002  "Mixed but predominantly strong
+                               materials"
+                           12  "Not Applicable"
+                          212  "Salvaged/makeshift materials"
+                       33,342  "Strong
+                               material(galvanized,iron,al,tile,concre
+                               te,brick,stone,asbestos)"
+
+               Warning: Variable has embedded blanks.
+
+------------------------------------------------------------------------------------------------------------------
+TypeofWalls                                                                                          Type of Walls
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: String (str14)
+
+         Unique values: 6                         Missing "": 0/41,544
+
+            Tabulation: Freq.  Value
+                        8,267  "Light"
+                           12  "NOt applicable"
+                        3,487  "Quite Strong"
+                          456  "Salvaged"
+                       27,739  "Strong"
+                        1,583  "Very Light"
+
+               Warning: Variable has embedded blanks.
+
+------------------------------------------------------------------------------------------------------------------
+HouseFloorArea                                                                                    House Floor Area
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (int)
+
+                 Range: [5,998]                       Units: 1
+         Unique values: 313                       Missing .: 0/41,544
+
+                  Mean: 55.6034
+             Std. dev.: 55.0232
+
+           Percentiles:     10%       25%       50%       75%       90%
+                             16        25        40        70       100
+
+------------------------------------------------------------------------------------------------------------------
+HouseAge                                                                                                 House Age
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (int)
+
+                 Range: [0,200]                       Units: 1
+         Unique values: 111                       Missing .: 0/41,544
+
+                  Mean: 20.1255
+             Std. dev.: 14.2955
+
+           Percentiles:     10%       25%       50%       75%       90%
+                              5        10        17        26        39
+
+------------------------------------------------------------------------------------------------------------------
+Numberofbedrooms                                                                                Number of bedrooms
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (byte)
+
+                 Range: [0,9]                         Units: 1
+         Unique values: 10                        Missing .: 0/41,544
+
+                  Mean: 1.78801
+             Std. dev.: 1.10566
+
+           Percentiles:     10%       25%       50%       75%       90%
+                              1         1         2         2         3
+
+------------------------------------------------------------------------------------------------------------------
+TenureStatus                                                                                         Tenure Status
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: String (str49)
+
+         Unique values: 8                         Missing "": 0/41,544
+
+            Tabulation: Freq.  Value
+                           73  "Not Applicable"
+                          425  "Own house, rent lot"
+                        6,165  "Own house, rent-free lot with consent
+                               of owner"
+                          995  "Own house, rent-free lot without
+                               consent of owner"
+                       29,541  "Own or owner-like possession of house
+                               and lot"
+                        2,203  "Rent house/room including lot"
+                        2,014  "Rent-free house and lot with consent
+                               of owner"
+                          128  "Rent-free house and lot without
+                               consent of owner"
+
+               Warning: Variable has embedded blanks.
+
+------------------------------------------------------------------------------------------------------------------
+ToiletFacilities                                                                                 Toilet Facilities
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: String (str62)
+
+         Unique values: 8                         Missing "": 0/41,544
+
+            Tabulation: Freq.  Value
+                        2,273  "Closed pit"
+                        1,580  "None"
+                        1,189  "Open pit"
+                          353  "Others"
+                          950  "Water-sealed, other depository, shared
+                               with other household"
+                        2,343  "Water-sealed, other depository, used
+                               exclusively by household"
+                        3,694  "Water-sealed, sewer septic tank,
+                               shared with other household"
+                       29,162  "Water-sealed, sewer septic tank, used
+                               exclusively by household"
+
+               Warning: Variable has embedded blanks.
+
+------------------------------------------------------------------------------------------------------------------
+Electricity                                                                                            (unlabeled)
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (byte)
+
+                 Range: [0,1]                         Units: 1
+         Unique values: 2                         Missing .: 0/41,544
+
+            Tabulation: Freq.  Value
+                        4,536  0
+                       37,008  1
+
+------------------------------------------------------------------------------------------------------------------
+MainSourceofWaterSupply                                                                Main Source of Water Supply
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: String (str39)
+
+         Unique values: 11                        Missing "": 0/41,544
+
+              Examples: "Own use, faucet, community water system"
+                        "Own use, faucet, community water system"
+                        "Own use, tubed/piped deep well"
+                        "Shared, faucet, community water system"
+
+               Warning: Variable has embedded blanks.
+
+------------------------------------------------------------------------------------------------------------------
+NumberofTelevision                                                                            Number of Television
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (byte)
+
+                 Range: [0,6]                         Units: 1
+         Unique values: 7                         Missing .: 0/41,544
+
+            Tabulation: Freq.  Value
+                       10,717  0
+                       27,089  1
+                        2,955  2
+                          597  3
+                          133  4
+                           42  5
+                           11  6
+
+------------------------------------------------------------------------------------------------------------------
+NumberofCDVCDDVD                                                                              Number of CD/VCD/DVD
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (byte)
+
+                 Range: [0,5]                         Units: 1
+         Unique values: 6                         Missing .: 0/41,544
+
+            Tabulation: Freq.  Value
+                       24,621  0
+                       15,983  1
+                          752  2
+                          163  3
+                           20  4
+                            5  5
+
+------------------------------------------------------------------------------------------------------------------
+NumberofComponentStereoset                                                          Number of Component/Stereo set
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (byte)
+
+                 Range: [0,5]                         Units: 1
+         Unique values: 6                         Missing .: 0/41,544
+
+            Tabulation: Freq.  Value
+                       35,058  0
+                        6,284  1
+                          174  2
+                           13  3
+                           10  4
+                            5  5
+
+------------------------------------------------------------------------------------------------------------------
+NumberofRefrigeratorFreezer                                                         Number of Refrigerator/Freezer
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (byte)
+
+                 Range: [0,5]                         Units: 1
+         Unique values: 6                         Missing .: 0/41,544
+
+            Tabulation: Freq.  Value
+                       25,990  0
+                       14,881  1
+                          569  2
+                           73  3
+                           17  4
+                           14  5
+
+------------------------------------------------------------------------------------------------------------------
+NumberofWashingMachine                                                                   Number of Washing Machine
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (byte)
+
+                 Range: [0,3]                         Units: 1
+         Unique values: 4                         Missing .: 0/41,544
+
+            Tabulation: Freq.  Value
+                       28,484  0
+                       12,845  1
+                          204  2
+                           11  3
+
+------------------------------------------------------------------------------------------------------------------
+NumberofAirconditioner                                                                    Number of Airconditioner
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (byte)
+
+                 Range: [0,5]                         Units: 1
+         Unique values: 6                         Missing .: 0/41,544
+
+            Tabulation: Freq.  Value
+                       37,457  0
+                        3,178  1
+                          622  2
+                          199  3
+                           66  4
+                           22  5
+
+------------------------------------------------------------------------------------------------------------------
+NumberofCarJeepVan                                                                        Number of Car, Jeep, Van
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (byte)
+
+                 Range: [0,5]                         Units: 1
+         Unique values: 6                         Missing .: 0/41,544
+
+            Tabulation: Freq.  Value
+                       38,876  0
+                        2,136  1
+                          413  2
+                           77  3
+                           29  4
+                           13  5
+
+------------------------------------------------------------------------------------------------------------------
+NumberofLandlinewirelesstelephon                                            Number of Landline/wireless telephones
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (byte)
+
+                 Range: [0,4]                         Units: 1
+         Unique values: 5                         Missing .: 0/41,544
+
+            Tabulation: Freq.  Value
+                       39,302  0
+                        2,070  1
+                           96  2
+                           48  3
+                           28  4
+
+------------------------------------------------------------------------------------------------------------------
+NumberofCellularphone                                                                     Number of Cellular phone
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (byte)
+
+                 Range: [0,10]                        Units: 1
+         Unique values: 11                        Missing .: 0/41,544
+
+                  Mean: 1.90574
+             Std. dev.: 1.55813
+
+           Percentiles:     10%       25%       50%       75%       90%
+                              0         1         2         3         4
+
+------------------------------------------------------------------------------------------------------------------
+NumberofPersonalComputer                                                               Number of Personal Computer
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (byte)
+
+                 Range: [0,6]                         Units: 1
+         Unique values: 7                         Missing .: 0/41,544
+
+            Tabulation: Freq.  Value
+                       32,988  0
+                        5,650  1
+                        1,836  2
+                          667  3
+                          271  4
+                          112  5
+                           20  6
+
+------------------------------------------------------------------------------------------------------------------
+NumberofStovewithOvenGasRange                                                  Number of Stove with Oven/Gas Range
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (byte)
+
+                 Range: [0,3]                         Units: 1
+         Unique values: 4                         Missing .: 0/41,544
+
+            Tabulation: Freq.  Value
+                       36,101  0
+                        5,287  1
+                          145  2
+                           11  3
+
+------------------------------------------------------------------------------------------------------------------
+NumberofMotorizedBanca                                                                   Number of Motorized Banca
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (byte)
+
+                 Range: [0,3]                         Units: 1
+         Unique values: 4                         Missing .: 0/41,544
+
+            Tabulation: Freq.  Value
+                       41,055  0
+                          444  1
+                           34  2
+                           11  3
+
+------------------------------------------------------------------------------------------------------------------
+NumberofMotorcycleTricycle                                                           Number of Motorcycle/Tricycle
+------------------------------------------------------------------------------------------------------------------
+
+                  Type: Numeric (byte)
+
+                 Range: [0,5]                         Units: 1
+         Unique values: 6                         Missing .: 0/41,544
+
+            Tabulation: Freq.  Value
+                       31,282  0
+                        8,811  1
+                        1,199  2
+                          186  3
+                           54  4
+                           12  5
+
+. 
+. * Variable-level missingness
+. misstable summarize
+(variables nonmissing or string)
+
+. misstable patterns
+(no missing values)
+
+. 
+. * Check exact duplicate rows
+. duplicates report
+
+Duplicates in terms of all variables
+
+--------------------------------------
+   Copies | Observations       Surplus
+----------+---------------------------
+        1 |        41544             0
+--------------------------------------
+
+. 
+. * Frequency checks for important categorical variables
+. unab rawvars : _all
+
+. 
+. * Save the untouched imported copy
+. save "$ROOT/data/clean/01_imported_raw.dta", replace
+file D:\Stata Projects\Project 2\stata-fies-simple-portfolio/data/clean/01_imported_raw.dta saved
+
+. 
+. log close
+      name:  <unnamed>
+       log:  D:\Stata Projects\Project 2\stata-fies-simple-portfolio/logs/01_setup_and_audit.log
+  log type:  text
+ closed on:  18 Aug 2026, 14:27:18
+------------------------------------------------------------------------------------------------------------------

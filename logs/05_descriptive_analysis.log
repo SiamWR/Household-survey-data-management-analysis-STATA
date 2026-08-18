@@ -1,0 +1,275 @@
+------------------------------------------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  D:\Stata Projects\Project 2\stata-fies-simple-portfolio/logs/05_descriptive_analysis.log
+  log type:  text
+ opened on:  18 Aug 2026, 16:01:45
+
+. 
+. use "$ROOT/data/clean/04_analysis_ready.dta", clear
+
+. 
+. * Overall descriptive statistics
+. 
+. summarize hh_income pc_income food_exp hh_size head_age ///
+>     employed_members food_income_ratio asset_count, detail
+
+                   Total household income
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%        34125          11285
+ 5%        56072          11988
+10%        71595          12039       Obs              41,544
+25%       104895          12141       Sum of wgt.      41,544
+
+50%     164079.5                      Mean           247555.6
+                        Largest       Std. dev.      286880.5
+75%       291139        7082152
+90%       502030        9952913       Variance       8.23e+10
+95%       692333       1.16e+07       Skewness        8.89631
+99%      1288000       1.18e+07       Kurtosis       213.6096
+
+                 Per-capita household income
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%       9548.6       3065.833
+ 5%     13771.67       3612.143
+10%        16702       3823.571       Obs              41,544
+25%      24236.5         4119.3       Sum of wgt.      41,544
+
+50%     40335.63                      Mean           64166.64
+                        Largest       Std. dev.      83912.48
+75%     73252.87        2360717
+90%     130850.5        2363198       Variance       7.04e+09
+95%       187470        2491983       Skewness       8.299091
+99%     373654.8        2572904       Kurtosis       145.4642
+
+                   Total food expenditure
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%        16850           2947
+ 5%        27956           3704
+10%        35653           5408       Obs              41,544
+25%      51016.5           5482       Sum of wgt.      41,544
+
+50%      72985.5                      Mean           85099.16
+                        Largest       Std. dev.      51637.95
+75%       105636         720007
+90%       148260         729606       Variance       2.67e+09
+95%       182002         791848       Skewness       2.230961
+99%       263778         827565       Kurtosis       14.17361
+
+                       Household size
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%            1              1
+ 5%            1              1
+10%            2              1       Obs              41,544
+25%            3              1       Sum of wgt.      41,544
+
+50%            4                      Mean           4.635182
+                        Largest       Std. dev.      2.280252
+75%            6             20
+90%            8             20       Variance       5.199548
+95%            9             20       Skewness        .866823
+99%           11             26       Kurtosis       4.653581
+
+                     Household head age
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%           23              9
+ 5%           29             10
+10%           33             13       Obs              41,544
+25%           41             13       Sum of wgt.      41,544
+
+50%           51                      Mean           51.38145
+                        Largest       Std. dev.      14.16608
+75%           61             99
+90%           71             99       Variance       200.6779
+95%           76             99       Skewness       .2369655
+99%           85             99       Kurtosis       2.610009
+
+                   Employed family members
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%            0              0
+ 5%            0              0
+10%            0              0       Obs              41,544
+25%            0              0       Sum of wgt.      41,544
+
+50%            1                      Mean           1.272699
+                        Largest       Std. dev.      1.149152
+75%            2              8
+90%            3              8       Variance        1.32055
+95%            3              8       Skewness        1.07203
+99%            5              8       Kurtosis       4.605483
+
+             Food expenditure / household income
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%     .1083831       .0156863
+ 5%     .1792828       .0198596
+10%     .2241362       .0240812       Obs              41,544
+25%     .3175628       .0241076       Sum of wgt.      41,544
+
+50%     .4375623                      Mean           .4489797
+                        Largest       Std. dev.      .2043179
+75%     .5603663       6.058279
+90%     .6706082       6.330895       Variance       .0417458
+95%     .7453289       8.945853       Skewness       6.960087
+99%     .9496531        9.59952       Kurtosis       230.6118
+
+          Count of selected asset categories owned
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%            0              0
+ 5%            0              0
+10%            1              0       Obs              41,544
+25%            1              0       Sum of wgt.      41,544
+
+50%            2                      Mean           2.879333
+                        Largest       Std. dev.      1.959401
+75%            4              8
+90%            6              8       Variance       3.839253
+95%            7              8       Skewness       .5361159
+99%            8              8       Kurtosis       2.547645
+
+. 
+. * Main categorical distributions
+. tabulate head_sex
+
+  Household |
+   head sex |      Freq.     Percent        Cum.
+------------+-----------------------------------
+     Female |      9,061       21.81       21.81
+       Male |     32,483       78.19      100.00
+------------+-----------------------------------
+      Total |     41,544      100.00
+
+. tabulate income_source
+
+     Main source of income |      Freq.     Percent        Cum.
+---------------------------+-----------------------------------
+Entrepreneurial Activities |     10,320       24.84       24.84
+   Other sources of Income |     10,836       26.08       50.92
+             Wage/Salaries |     20,388       49.08      100.00
+---------------------------+-----------------------------------
+                     Total |     41,544      100.00
+
+. tabulate region
+
+                  region |      Freq.     Percent        Cum.
+-------------------------+-----------------------------------
+                    ARMM |      2,248        5.41        5.41
+                     CAR |      1,725        4.15        9.56
+                  Caraga |      1,782        4.29       13.85
+       I - Ilocos Region |      2,348        5.65       19.50
+     II - Cagayan Valley |      2,219        5.34       24.85
+     III - Central Luzon |      3,237        7.79       32.64
+        IVA - CALABARZON |      4,162       10.02       42.66
+          IVB - MIMAROPA |      1,249        3.01       45.66
+IX - Zamboanga Peninsula |      1,788        4.30       49.97
+                     NCR |      4,130        9.94       59.91
+        V - Bicol Region |      2,472        5.95       65.86
+    VI - Western Visayas |      2,851        6.86       72.72
+   VII - Central Visayas |      2,541        6.12       78.84
+  VIII - Eastern Visayas |      2,337        5.63       84.46
+   X - Northern Mindanao |      1,887        4.54       89.00
+       XI - Davao Region |      2,446        5.89       94.89
+      XII - SOCCSKSARGEN |      2,122        5.11      100.00
+-------------------------+-----------------------------------
+                   Total |     41,544      100.00
+
+. tabulate head_job
+
+   Household head |
+     job/business |
+           status |      Freq.     Percent        Cum.
+------------------+-----------------------------------
+  No Job/Business |      7,536       18.14       18.14
+With Job/Business |     34,008       81.86      100.00
+------------------+-----------------------------------
+            Total |     41,544      100.00
+
+. tabulate income_quintile
+
+  Per-capita |
+      income |
+    quintile |      Freq.     Percent        Cum.
+-------------+-----------------------------------
+ Q1 - Lowest |      8,309       20.00       20.00
+          Q2 |      8,309       20.00       40.00
+          Q3 |      8,309       20.00       60.00
+          Q4 |      8,309       20.00       80.00
+Q5 - Highest |      8,308       20.00      100.00
+-------------+-----------------------------------
+       Total |     41,544      100.00
+
+. 
+. * Table: household profile by income quintile
+. 
+. preserve
+
+. 
+. collapse ///
+>     (count) households=hh_id ///
+>     (median) median_hh_income=hh_income ///
+>              median_pc_income=pc_income ///
+>     (mean) mean_hh_size=hh_size ///
+>            mean_employed=employed_members ///
+>            mean_food_income_ratio=food_income_ratio ///
+>            electricity_rate=electricity_access ///
+>            mean_asset_count=asset_count, ///
+>     by(income_quintile)
+
+. 
+. export excel "$ROOT/output/tables/income_quintile_profile.xlsx", ///
+>     firstrow(variables) replace
+file D:\Stata Projects\Project 2\stata-fies-simple-portfolio/output/tables/income_quintile_profile.xlsx saved
+
+. 
+. export delimited "$ROOT/output/tables/income_quintile_profile.csv", replace
+file D:\Stata Projects\Project 2\stata-fies-simple-portfolio/output/tables/income_quintile_profile.csv saved
+
+. 
+. restore
+
+. 
+. 
+. * Figure 1: Distribution of log household income
+. 
+. histogram ln_income, percent normal ///
+>     title("Distribution of Log Household Income") ///
+>     xtitle("Log household income") ///
+>     ytitle("Percent")
+(bin=46, start=9.3312297, width=.15116814)
+
+. 
+. 
+. 
+. * Figure 2: Median per-capita income by quintile
+. 
+. graph bar (median) pc_income, ///
+>     over(income_quintile) ///
+>     title("Per-Capita Income by Income Quintile") ///
+>     ytitle("Median per-capita income")
+
+. 
+. 
+. 
+. 
+. * Figure 3: Asset ownership by income quintile
+. 
+. graph bar (mean) own_refrigerator own_computer own_car own_cellphone, ///
+>     over(income_quintile) ///
+>     title("Selected Asset Ownership by Income Quintile") ///
+>     ytitle("Share of households") ///
+>     legend(order(1 "Refrigerator" 2 "Computer" 3 "Car" 4 "Cellphone"))
+
+. 
+. 
+. log close
+      name:  <unnamed>
+       log:  D:\Stata Projects\Project 2\stata-fies-simple-portfolio/logs/05_descriptive_analysis.log
+  log type:  text
+ closed on:  18 Aug 2026, 16:01:49
+------------------------------------------------------------------------------------------------------------------
