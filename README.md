@@ -1,14 +1,15 @@
 # Household-survey-data-management-analysis-STATA
-# Stata Household Income & Expenditure Project
+A reproducible Stata data cleaning, processing, validation, and socioeconomic analysis project using household-level Family Income and Expenditure data.
 
-A simple, recruiter-friendly Stata project that demonstrates practical **data cleaning, data processing, validation, descriptive analysis, and regression** using a household Family Income and Expenditure dataset.
-
+## Project Overview
+The project demonstrates a practical workflow for converting raw survey data into a clean, validated, and analysis-ready dataset while documenting important data-quality decisions. Household survey datasets often contain inconsistent categories, missing information, unusual values, and variables that require transformation before statistical analysis.
 ## Dataset
 
 - File: `Family Income and Expenditure.csv`
 - Observations: 41,544 households
 - Raw variables: 60
 - Unit of analysis: household
+- Source: https://www.kaggle.com/datasets/grosvenpaul/family-income-and-expenditure
 
 ## What this project demonstrates
 
@@ -30,10 +31,9 @@ A simple, recruiter-friendly Stata project that demonstrates practical **data cl
 ## Folder structure
 
 ```text
-stata-fies-simple-portfolio/
+household-income-expenditure-analysis/
 │
 ├── README.md
-├── .gitignore
 │
 ├── data/
 │   ├── raw/
@@ -41,7 +41,6 @@ stata-fies-simple-portfolio/
 │   └── clean/
 │
 ├── do/
-│   ├── 00_master.do
 │   ├── 01_setup_and_audit.do
 │   ├── 02_clean_data.do
 │   ├── 03_validate_data.do
@@ -51,37 +50,10 @@ stata-fies-simple-portfolio/
 │
 ├── logs/
 ├── output/
-│   ├── tables/
-│   └── figures/
-│
-└── documentation/
-    ├── data_dictionary.md
-    └── data_quality_notes.md
+   ├── tables/
+   └── figures/
+
 ```
-
-## How to run
-
-1. Extract the project.
-2. Open Stata.
-3. Set Stata's working directory to the project folder:
-
-```stata
-cd "C:\path\to\stata-fies-simple-portfolio"
-```
-
-4. Run:
-
-```stata
-do "do/00_master.do"
-```
-
-All do-files use only one project global:
-
-```stata
-global ROOT "."
-```
-
-If you want to use a fixed absolute path, change that line to your project folder.
 
 ## Workflow
 
@@ -105,7 +77,7 @@ Regression analysis
 
 The project does not automatically delete unusual records.
 
-It identifies and documents:
+It identifies:
 - structural missing occupation/class-of-worker values for heads with no job/business;
 - households where child counts exceed household size;
 - households where employed-member counts exceed household size;
@@ -123,6 +95,4 @@ The final OLS model uses log household income and robust standard errors.
 
 The available Kaggle extract does not contain identifiable survey weights, strata, or PSU variables. Therefore the regression should be described as **unweighted conditional associations in the available dataset**, not as causal effects or survey-weighted national estimates.
 
-## GitHub note
 
-The `.gitignore` excludes the raw CSV and generated `.dta` files by default. Verify the dataset licence before publishing the microdata. You can still publish all Stata code, documentation, figures, and non-sensitive summary outputs.
